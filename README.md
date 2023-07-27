@@ -1,6 +1,4 @@
-# IDR 私库
-
-[私库设计](https://idr-corp.feishu.cn/docx/VPFSdXsPmoMRS5xi3c4cGteVnLh)
+# [ver](https://verdaccio.org/) with Storybook
 
 ```bash
 #安装依赖
