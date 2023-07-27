@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import classnames from 'classnames';
-import './button.less';
+import './button.scss';
 
 type ButtonProps = {
   theme?: 'pink' | 'blue' | 'green' | 'default';
