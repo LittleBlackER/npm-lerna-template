@@ -1,0 +1,82 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "lerna-install-module": "pnpm install",
+    "lerna-publish": "lerna publish --conventional-commits -m 'build(upgrade-version): 升级版本 -->> %s'",
+    "build": "lerna run --stream --sort build",
+    "clean": "lerna clean && rimraf packages/**/dist && rimraf packages/**/lib && rimraf packages/**/es",
+    "start": "lerna run storybook --scope @idr/storybook",
+    "run:demo-test": "lerna run start --scope demo-test",
+    "publish:local": "lerna publish from-package --registry=\"http://localhost:4873/\"",
+    "release:version": "lerna version --no-git-tag-version --no-push --no-private && pnpm change:rootVersion && pnpm update:changelog",
+    "cm": "cz",
+    "prepare": "husky install",
+    "test": "lerna run test"
+  },
+  "workspaces": [
+    "packages/*",
+    "storybook"
+  ],
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "@types/jest": "^26.0.22",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-webpack-plugin": "^4.0.1",
+    "husky": "7.0.1",
+    "lerna": "^6.6.2",
+    "lint-staged": "^13.2.1",
+    "parcel": "^2.8.3",
+    "prettier": "^2.8.8",
+    "stylelint": "^14.16.1",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-standard-scss": "3.0.0",
+    "stylelint-config-twbs-bootstrap": "^3.0.1",
+    "typescript": "^4.6.3"
+  },
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=8"
+  },
+  "release": {
+    "scripts": {
+      "pre-release": "pnpm build"
+    },
+    "version": {
+      "exact": true,
+      "excludeDependents": true
+    }
+  },
+  "publishConfig": {
+    "registry": "http://localhost:4873"
+  },
+  "dependencies": {
+    "@parcel/transformer-less": "^2.8.3",
+    "process": "^0.11.10",
+    "rimraf": "^5.0.1"
+  },
+  "lint-staged": {
+    "src/**/*.{scss,css,less,module.scss,module.less}": [
+      "stylelint --fix"
+    ],
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --ext js,jsx,ts,tsx --fix"
+    ],
+    "**/*.{md,json,js,jsx,tsx,ts,css,less,scss,module.scss,module.less}": [
+      "prettier --write"
+    ],
+    "*.js": "eslint --cache --fix",
+    "*.css": "stylelint --fix"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
+
+}
