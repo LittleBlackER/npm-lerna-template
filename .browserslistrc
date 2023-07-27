@@ -1,0 +1,13 @@
+[production]    # prod 时根据网站目前访问情况设置
+> 0.5%          # 对其他浏览器保底
+last 2 versions # 对其他浏览器保底
+chrome 49       # Chrome 49 目前全站每天还有上万的访问量，主要是一些老的微信内置浏览器
+safari 11
+not dead        # 不支持已经 dead 的
+not op_mini all # 不支持 op_mini all
+not ie 11       # 不支持 IE
+
+[development]   # dev 时忽略兼容性，提高速度，也可根据情况修改
+last 1 chrome version
+last 1 firefox version
+last 1 safari version
